@@ -27,37 +27,48 @@ class Calc extends React.Component {
     }// /constructor
 
 numInput(e){
-    if(this.state.equation.length==0){
-        this.setState({
-            equation: this.state.equation + e.currentTarget.value 
-        });
-    }else if (this.state.equation.match(/[0-9\.]|[+\-*\/]$/)){
-        this.setState({
-            equation: this.state.equation + e.currentTarget.value
-        });
-    }else if (this.state.equation.includes('=')){
-        this.setState({
-            equation: e.currentTarget.value,
-            display: e.currentTarget.value
-        });
+    if (this.state.equation.length <= 15){
+        if(!this.state.equation.includes('=')){
+            if(this.state.equation.length==0){
+                this.setState({
+                    equation: this.state.equation + e.currentTarget.value 
+                });
+            }else if (this.state.equation.match(/[0-9\.]|[+\-*\/]$/)){
+                this.setState({
+                    equation: this.state.equation + e.currentTarget.value
+                });
+            }else if (this.state.equation.includes('=')){
+                this.setState({
+                    equation: e.currentTarget.value,
+                    display: e.currentTarget.value
+                });
+            }
+        }else{
+            this.setState({
+                equation: e.currentTarget.value
+            });
+
+        }
     }
 }
 
 dotInput(e){
-    if(this.state.equation.length==0){
-        this.setState({
-            equation: e.currentTarget.value,
-            display: e.currentTarget.value
-        });
-    }else if (!this.state.equation.includes('=') && !this.state.equation.includes('.') ){
-        this.setState({
-            equation: this.state.equation + e.currentTarget.value
-        });
-    }else if (this.state.equation.includes('=')){
-        this.setState({
-            equation: e.currentTarget.value,
-            display: e.currentTarget.value
-        });
+    if (this.state.equation.length <= 15){
+        if(this.state.equation.length==0){
+            this.setState({
+                equation: e.currentTarget.value,
+                display: e.currentTarget.value
+            });
+        }else if (!this.state.equation.includes('=') && !this.state.equation.includes('.') ){
+            this.setState({
+                equation: this.state.equation + e.currentTarget.value
+            });
+        }else if (this.state.equation.includes('=')){
+            this.setState({
+                equation: e.currentTarget.value,
+                display: e.currentTarget.value
+            });
+        }
     }
 }
 
@@ -69,35 +80,45 @@ acPress(){
 }
 
 minusPress(e){
-    if (!this.state.equation.includes('=')){
-        if(this.state.equation.length==0 || !this.state.equation.match(/[+\-*\/\.]$/)){
+    if (this.state.equation.length <= 15){
+        if (!this.state.equation.includes('=')){
+            if(this.state.equation.length==0 || !this.state.equation.match(/[+\-*\/\.]$/)){
+                this.setState({
+                    equation: this.state.equation + e.currentTarget.value
+                });
+            }
+        }else if (this.state.equation.includes('=')){
             this.setState({
-                equation: this.state.equation + e.currentTarget.value
+                equation: e.currentTarget.value,
+                display: e.currentTarget.value
             });
         }
-    }else if (this.state.equation.includes('=')){
-        this.setState({
-            equation: e.currentTarget.value,
-            display: e.currentTarget.value
-        });
     }
 }
 
 mOperatorPress(e){
-    if(!this.state.equation.includes('=')){
-        if(!this.state.equation.length==0 && !this.state.equation.match(/[+\-*\/\.]$/)){
-            this.setState({
-                equation: this.state.equation + e.currentTarget.value
-            });
+    if (this.state.equation.length <= 15){
+        if(!this.state.equation.includes('=')){
+            if(!this.state.equation.length==0 && !this.state.equation.match(/[+\-*\/\.]$/)){
+                this.setState({
+                    equation: this.state.equation + e.currentTarget.value
+                });
+            }
         }
     }
 }
 
 zeroPress(e){
-    if(!this.state.equation.includes('=')){
-        if(!this.state.equation.length==0 && !this.state.equation.match(/[+\-*\/\.]$/)){
+    if (this.state.equation.length <= 15){
+        if(!this.state.equation.includes('=')){
+            if(!this.state.equation.length==0 && !this.state.equation.match(/[+\-*\/\.]$/)){
+                this.setState({
+                    equation: this.state.equation + e.currentTarget.value
+                });
+            }
+        }else {
             this.setState({
-                equation: this.state.equation + e.currentTarget.value
+                equation: e.currentTarget.value
             });
         }
     }
